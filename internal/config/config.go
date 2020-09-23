@@ -23,6 +23,7 @@ type TwitterConfig struct {
 
 type TwilioConfig struct {
 	AccountSID        string
+	AuthSID           string
 	Token             string
 	SourceNumber      string
 	DestinationNumber string
@@ -214,6 +215,13 @@ func GetTwilioConfig() TwilioConfig {
 	}
 
 	configuration.AccountSID = accountSid
+
+	authSid, authSidOk := os.LookupEnv("TWILIO_AUTH_SID")
+	if authSidOk == false {
+		authSid = accountSid
+	}
+
+	configuration.AuthSID = authSid
 
 	token, tokenOk := os.LookupEnv("TWILIO_TOKEN")
 	if tokenOk == false {

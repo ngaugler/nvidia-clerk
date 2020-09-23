@@ -21,7 +21,7 @@ func SendText(item string, config config.TwilioConfig, client *http.Client) erro
 	msgDataReader := *strings.NewReader(msgData.Encode())
 
 	req, _ := http.NewRequest("POST", endpoint, &msgDataReader)
-	req.SetBasicAuth(config.AccountSID, config.Token)
+	req.SetBasicAuth(config.AuthSID, config.Token)
 	req.Header.Add("Accept", "application/json")
 	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
 
